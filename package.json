@@ -1,0 +1,34 @@
+{
+  "name": "ndaoary-afmika-tokenized",
+  "version": "1.0.0",
+  "description": "NdaoAry backend - afmika version",
+  "main": "Connection.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "busboy": "^0.3.1",
+    "express": "^4.17.1",
+    "expressjs": "^1.0.1",
+    "ftp": "^0.3.10",
+    "jsonwebtoken": "^8.5.1",
+    "lzma": "^2.3.2",
+    "nodemailer": "^6.4.14",
+    "pg": "^8.3.2",
+    "socket.io": "^2.3.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node test.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afmika/NdaoAry-afmika.git"
+  },
+  "author": "afmika",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/afmika/NdaoAry-afmika/issues"
+  },
+  "homepage": "https://github.com/afmika/NdaoAry-afmika#readme"
+}

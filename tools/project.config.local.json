@@ -1,0 +1,52 @@
+{
+	"PORT" : "3001",
+	"SERVER_ADDR" : "http://localhost",
+
+	"DATABASE_CONF" : {
+		"user" : "postgres",
+		"database" : "sakaiza",
+		"host" : "localhost",
+		"password" : "1234",
+		"port" : 5432
+	},
+
+	"ERROR_LOG" : "./logs/error.log",
+	"LOG" : "./logs/console.log",
+
+	"LOG_STATUS" : {
+		"STOP_ALL" : false,
+
+		"INFO" : true,
+		"WARN" : true,
+		"ERROR" : true
+	},
+
+
+	"FILE_HOST" : {
+	    "ADDR" : "http://localhost",
+		"PORT" : "3002"
+	},
+
+
+	"SUPPR_AUTO_SEC" : 60,
+
+	"IMAGE" : {
+		"EXP_DURATION_SEC" : 30,
+		"EXP_MAX_IF_UNREAD" : 86400
+	},
+
+	"SEARCH_LIMIT" : 10,
+
+	"SEXE" : ["h", "f", "%%"],
+	"ETAT" : {
+		"CHAT" : {
+			"NON_VUE" : 1,
+			"VUE" : 11
+		},
+		"CONVERSATION" : {
+			"CREER" : 1,
+			"INFINIE" : 10,
+			"EXPIREE" : -10
+		}
+	}
+}
