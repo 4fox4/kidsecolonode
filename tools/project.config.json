@@ -1,12 +1,12 @@
 {
 	"PORT" : "3001",
-	"SERVER_ADDR" : "http://localhost",
+	"SERVER_ADDR" : "localhost",
 
 	"DATABASE_CONF" : {
-		"user" : "postgres",
-		"database" : "sakaiza",
-		"host" : "localhost",
-		"password" : "1234",
+		"user" : "hyuefbvkvvccxh",
+		"database" : "d90uggp0b4ln3",
+		"host" : "ec2-44-196-223-128.compute-1.amazonaws.com",
+		"password" : "e3394c718dc95572a4119791cf611bdccfee9a6298d27487fffeb43f6e2774dd",
 		"port" : 5432
 	},
 
