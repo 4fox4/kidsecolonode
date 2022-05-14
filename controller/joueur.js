@@ -18,25 +18,58 @@ router.get('/', (req, res) => {
 	});
 });
 
+router.get('/score', (req, res) =>{
+	const connexion = Connection();
+	const promise = JoueurModel.getScore(connexion, req.query.idjoueur);
+	promise.then(function(value){
+		res.json(value);
+	}).catch( error => {
+		console.error(error);
+		res.json({
+			status : 400, // reponse http
+			error : true, // pour signaler que ceci est une erreur
+			detailed : `${error} : concernant la requête infos `, // erreur pour les devs
+			data : "Une erreur est survenue lors de la requête" // pour les users
+		});
+	}).finally(()=>{
+		connexion.end();
+	});
+});
+
+router.post('/login', (req, res) =>{
+	const connexion = Connection();
+	const promise = JoueurModel.login(connexion, req.body.pseudo, req.body.mdp);
+	promise.then(function(value){
+		res.json(value);
+	}).catch( error => {
+		console.error(error);
+		res.json({
+			status : 400, // reponse http
+			error : true, // pour signaler que ceci est une erreur
+			detailed : `${error} : concernant la requête infos `, // erreur pour les devs
+			data : "Une erreur est survenue lors de la requête" // pour les users
+		});
+	}).finally(()=>{
+		connexion.end();
+	});
+});
 
 router.post('/inscription', (req, res) =>{
-    let connection = new Connection();
-    promise.then(function(db){
-        const promise = JoueurModel.inscrire(req.body.nom, req.body.prenoms, req.body.pseudo, req.body.datenaissance, req.mody.mdp);
-		promise.then(function(value){
-            res.json(value);
-        }).catch( error => {
-            console.error(error);
-            res.json({
-                status : 400, // reponse http
-                error : true, // pour signaler que ceci est une erreur
-                detailed : `${error} : concernant la requête infos `, // erreur pour les devs
-                data : "Une erreur est survenue lors de la requête" // pour les users
-            });
-        }).finally(()=>{
-            connection.endConnection();
-        });
-    });
+	const connexion = Connection();
+	const promise = JoueurModel.inscrire(connexion, req.body.nom, req.body.prenoms, req.body.pseudo, req.body.datenaissance, req.body.mdp);
+	promise.then(function(value){
+		res.json(value);
+	}).catch( error => {
+		console.error(error);
+		res.json({
+			status : 400, // reponse http
+			error : true, // pour signaler que ceci est une erreur
+			detailed : `${error} : concernant la requête infos `, // erreur pour les devs
+			data : "Une erreur est survenue lors de la requête" // pour les users
+		});
+	}).finally(()=>{
+		connexion.end();
+	});
 });
 
 module.exports = router;

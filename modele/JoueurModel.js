@@ -1,74 +1,102 @@
 /* node JS */
 let connection = require('../Connection');
-let connexion = connection();
 const logger = require("../tools/logger").Create(__filename); // debug perso
-const assert = require('assert');
-const config = require('../tools/project.config.json');
 const Tools = require('../tools/Tools');
 
 module.exports = class JoueurModel{
 
-	/**
-	 * INSCRIPTION EN MODE TRANSACTIONNEL
-	 * PERMET D'ASSURER QU'UNE INSCRIPTION S'INSERE AVEC UNE PREFERENCE EXISTANTE
-	 */
-    static async inscrire (nom, prenoms, pseudo, datenaissance, mdp) {
-
-		const model = JoueurModel;
-		try {
-			await connexion.query('BEGIN'); // debute la transaction
-
-			// user query
-			const userQuery = {
-				text : `insert into JOUEUR (nom, prenoms, pseudo, datenaissance, mdp)
-						 values
-						($1, $2, $3, $4, sha1($5))`,
-				values : [
-					nom, prenoms, pseudo, datenaissance, mdp
-				]
+    static getScore(connexion, idjoueur){
+        return new Promise((resolve, reject) => {
+			const sql = {
+				text : "select * from scorepartheme where idjoueur like $1",
+				values : [idjoueur]
 			};
-            connexion.query(userQuery, function(error){
-                if(error){
-                    logger.error(error);
-                    reject(error);
-                    return;
-                }else{
+			logger.info(sql);
+			connexion.query(sql, function(error, resultSet, fields){
+				if(error){
+					logger.error(error);
+					reject(error);
+					return;
+				}
+                if(Object.keys(resultSet.rows).length === 0){
                     let result = {
                         "status" : "200",
-                        "data" : model
+                        "error": "Jouez pour voir vos scores"
                     };
                     resolve(result);
                 }
-            });
-		} catch(e) {
-			logger.error(`Echec Insertion user ${pseudo}, Rollback`);
-			logger.error(e.detail || (e + ''));
-			await connexion.query('ROLLBACK');
-			throw e;
-		}
+                let finalres = {
+                        "status" : "200",
+                        "data" : resultSet.rows
+                    };
+                resolve(finalres);
+			});
+        })
+    }
+
+    static inscrire (connexion, nom, prenoms, pseudo, datenaissance, mdp) {
+        return new Promise((resolve, reject) => {
+            const model = JoueurModel;
+            try {
+                // user query
+                const userQuery = {
+                    text : `insert into JOUEUR (nom, prenoms, pseudo, datenaissance, mdp)
+                            values
+                            ($1, $2, $3, $4, sha1($5))`,
+                    values : [
+                        nom, prenoms, pseudo, datenaissance, mdp
+                    ]
+                };
+                connexion.query(userQuery, function(error){
+                    if(error){
+                        logger.error(error);
+                        reject(error);
+                        return;
+                    }else{
+                        let result = {
+                            "status" : "200",
+                            "data" : model
+                        };
+                        resolve(result);
+                    }
+                });
+            } catch(e) {
+                logger.error(`Echec Insertion user ${pseudo}, Rollback`);
+                logger.error(e.detail || (e + ''));
+                throw e;
+            }
+        })
 	}
 
     //login
     static login(connexion, login, password){
         return new Promise((resolve, reject) => {
 			const sql = {
-				text : "select * from JOUEUR where EMAIL like $1 and PASSWORD like sha1($2) and etat>=0",
-				//text : "select * from JOUEUR where EMAIL like $1 and PASSWORD like $2",
+				text : "select * from joueur where pseudo like $1 and mdp like sha1($2) and etat>0",
 				values : [login, password]
 			};
 			logger.info(sql);
 			connexion.query(sql, function(error, resultSet, fields){
-				logger.error(error);
 				if(error){
 					logger.error(error);
 					reject(error);
 					return;
 				}
-				let data = [];
+                if(Object.keys(resultSet.rows).length === 0){
+                    let result = {
+                        "status" : "200",
+                        "error": "Login ou mot de passe erroné"
+                    };
+                    resolve(result);
+                }
 				for(let result in resultSet.rows){
-                    if(resultSet.rows[result].etat>=0)
+                    if(resultSet.rows[result].etat>0)
                     {
-                        data.push(resultSet.rows[result]);
+                        let finalres = {
+                            "status" : "200",
+                            "data" : resultSet.rows[result]
+                        };
+                        resolve(finalres);
                     }
                     else
                     {
@@ -76,39 +104,9 @@ module.exports = class JoueurModel{
                             "status" : "400",
                             "data" : "Ce compte est déja supprimé"
                         };
-                        // resolve(result);
                         reject(result);
                     }
 				}
-				if(data.length == 0){
-                    let result = {
-                        "status" : "400",
-                        "data" : "Veuillez vérifier votre email ou votre mot de passe"
-                    };
-                    // resolve(result);
-					reject(result);
-					
-                } else {
-                    // "update JOUEUR set etat=1 where idJOUEUR='"+data[0].idJOUEUR+"'";
-					const sql1 = {
-						text : "update JOUEUR set etat=1 where idJOUEUR=$1",
-						values : [ data[0].idJOUEUR ]
-					};
-                    logger.info(sql1);
-                    connexion.query(sql1, function(error, resultSet, fields){
-						if(error){
-							logger.error(error);
-							reject(error);
-							return;
-						}else{
-							let result = {
-								"status" : "200",
-								"data" : data
-							};
-							resolve(result);
-						}
-					});
-                }
 			});
         })
     }

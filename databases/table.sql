@@ -23,6 +23,11 @@ create table theme(
     desce text,
     etat int
 );
+
+insert into theme(valeur, desce, etat) values ('Recyclage', 'Transformer les déchets de tous les jours en des outils utiles. Par exemple: utiliser les bouteilles comme pots de fleurs, ou comme arrosoir, ...', 1);
+insert into theme(valeur, desce, etat) values ('Trier les déchets', 'Trier les déchets', 1);
+insert into theme(valeur, desce, etat) values ('Ecogeste', 'Utile pour le quotidien: utiliser le vélo au lieu du véhicule, utiliser un gobelet pour se brosser les dents, utiliser des sacs durables et biodégradables au lieu de plastique', 1);
+
 CREATE SEQUENCE detailsthseq INCREMENT 1 START 1;
 create table detailstheme(
     id varchar (25) primary key,
@@ -64,6 +69,15 @@ create table reponsejoueur(
     foreign key (idquestion) references question(id),
     foreign key (idjoueur) references joueur(id)
 );
+
+--lib theme (theme selon question)
+create or replace view questiontheme as select q.id, idtheme, question, idniveau, t.valeur, desce, ordre, etat from question q join theme t on q.idtheme = t.id join niveau n on q.idniveau = n.id;
+--reponse joueur complet
+create or replace view reponsejoueurcplt as select rj.id, rj.idquestion, rj.idjoueur, rj.pts, j.nom, j.prenoms, j.pseudo, j.datenaissance, j.etat as etatj, qt.question, qt.idniveau, qt.ordre, qt.valeur, qt.desce from reponsejoueur rj join joueur j on 
+rj.idjoueur = j.id join questiontheme qt on rj.idquestion = qt.id;
+--score de joueur par theme
+create or replace view scorepartheme as
+select valeur, idjoueur, max(pts) as score from reponsejoueurcplt group by valeur, idjoueur;
 
 --trigger
 create or replace function joueur_func()

@@ -1,0 +1,19 @@
+inscription
+POST /joueur/inscription
+body {
+    "nom": "Rajaonah",
+    "prenoms": "Aina",
+    "pseudo": "Aina kely",
+    "mdp": "aina",
+    "datenaissance": "12-16-2018" 
+}
+
+Login
+POST /joueur/login
+body {
+    "pseudo": "Aina kely",
+    "mdp": "aina"
+}
+
+Avoir score
+GET /joueur/score?id=JOU0001
