@@ -7,7 +7,7 @@ AuthentificationRoutine.check = (req, res, next) => {
 	// console.log( res.locals.connectedPeople );
 	logger.log(req.url);
 	// url sans protection
-	let exceptions = [
+	/*let exceptions = [
 		'/login', '/inscription', '/logAdmin', 
 		'/ville', '/interet', '/photo',
 		'/generercode', '/confirmcode', '/verifemail',
@@ -42,7 +42,8 @@ AuthentificationRoutine.check = (req, res, next) => {
 			});
 		};
 		TokenManager.verify(token, onSuccess, onError);	
-	}
+	}*/
+	next();
 }
 
 module.exports = AuthentificationRoutine;

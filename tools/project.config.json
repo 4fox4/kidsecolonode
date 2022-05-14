@@ -3,10 +3,10 @@
 	"SERVER_ADDR" : "localhost",
 
 	"DATABASE_CONF" : {
-		"user" : "hyuefbvkvvccxh",
-		"database" : "d90uggp0b4ln3",
-		"host" : "ec2-44-196-223-128.compute-1.amazonaws.com",
-		"password" : "e3394c718dc95572a4119791cf611bdccfee9a6298d27487fffeb43f6e2774dd",
+		"user" : "qwmqxrbv",
+		"database" : "qwmqxrbv",
+		"host" : "motty.db.elephantsql.com",
+		"password" : "MCKCyNBuefVj_NtQFqpQg4qxpWzvdKFT",
 		"port" : 5432
 	},
 

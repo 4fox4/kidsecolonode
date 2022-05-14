@@ -69,7 +69,7 @@ create table reponsejoueur(
 create or replace function joueur_func()
     returns trigger AS $$
         begin
-            new.id = concat('JOU', nextval('joueurseq'));
+            new.id = concat('JOU', TO_CHAR(nextval('joueurseq'), 'fm0000'));
             return new;
         END
     $$ LANGUAGE plpgsql;
@@ -83,7 +83,7 @@ CREATE TRIGGER insert_joueur
 create or replace function theme_func()
     returns trigger AS $$
         begin
-            new.id = concat('THM', nextval('themeseq'));
+            new.id = concat('THM', TO_CHAR(nextval('themeseq'), 'fm0000'));
             return new;
         END
     $$ LANGUAGE plpgsql;
@@ -97,7 +97,7 @@ CREATE TRIGGER insert_theme
 create or replace function detailsthm_func()
     returns trigger AS $$
         begin
-            new.id = concat('DTH', nextval('detailsthseq'));
+            new.id = concat('DTH', TO_CHAR(nextval('detailsthseq'), 'fm0000'));
             return new;
         END
     $$ LANGUAGE plpgsql;
@@ -111,7 +111,7 @@ CREATE TRIGGER insert_detailtheme
 create or replace function niveau_func()
     returns trigger AS $$
         begin
-            new.id = concat('NIV', nextval('niveauseq'));
+            new.id = concat('NIV', TO_CHAR(nextval('niveauseq'), 'fm0000'));
             return new;
         END
     $$ LANGUAGE plpgsql;
@@ -125,7 +125,7 @@ CREATE TRIGGER insert_niveau
 create or replace function question_func()
     returns trigger AS $$
         begin
-            new.id = concat('QUE', nextval('questionseq'));
+            new.id = concat('QUE', TO_CHAR(nextval('questionseq'), 'fm0000'));
             return new;
         END
     $$ LANGUAGE plpgsql;
@@ -139,7 +139,7 @@ CREATE TRIGGER insert_question
 create or replace function resquestion_func()
     returns trigger AS $$
         begin
-            new.id = concat('REQ', nextval('repquestseq'));
+            new.id = concat('REQ',TO_CHAR(nextval('repquestseq'), 'fm0000'));
             return new;
         END
     $$ LANGUAGE plpgsql;
@@ -153,7 +153,7 @@ CREATE TRIGGER insert_repquestion
 create or replace function repjoueur_func()
     returns trigger AS $$
         begin
-            new.id = concat('REJ', nextval('repjseq'));
+            new.id = concat('REJ', TO_CHAR(nextval('repjseq'), 'fm0000'));
             return new;
         END
     $$ LANGUAGE plpgsql;
@@ -163,3 +163,8 @@ CREATE TRIGGER insert_repj
     ON reponsejoueur
     FOR EACH ROW
     EXECUTE PROCEDURE repjoueur_func();
+
+alter table joueur alter column etat set default 1;
+alter table theme alter column etat set default 1;
+
+alter table joueur add column mdp text;

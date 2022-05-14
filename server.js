@@ -23,8 +23,8 @@ app.use(function(req, res, next) {
 
 // [!] : definition des routes
 // Chaque lien et sous lien devrait avoir une protection token
-app.use('/session', require("./controller/session")); // authentification (login, logout)
-app.use('/user', require("./controller/user")); // creation, update, delete, recherche ...
+app.use('/session', require("./controller/session")); // check token validation (login, logout)
+app.use('/joueur', require("./controller/joueur")); // inscription, 
 
 // [!] : mini page web pour tester les sockets (faites pas attention)
 app.use('/test_socket', express.static('./tools/test_socket'));
