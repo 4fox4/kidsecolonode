@@ -26,6 +26,7 @@ app.use(function(req, res, next) {
 app.use('/session', require("./controller/session")); // check token validation (login, logout)
 app.use('/joueur', require("./controller/joueur")); // inscription, 
 app.use('/theme', require("./controller/theme")); // theme, 
+app.use('/question', require("./controller/question")); // theme, 
 
 // [!] : mini page web pour tester les sockets (faites pas attention)
 app.use('/test_socket', express.static('./tools/test_socket'));

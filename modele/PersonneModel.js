@@ -1,6 +1,4 @@
 /* node JS */
-//let connection = require('../Connection');
-//let connexion = connection();
 const logger = require("../tools/logger").Create(__filename); // debug perso
 const assert = require('assert');
 const config = require('../tools/project.config.json');

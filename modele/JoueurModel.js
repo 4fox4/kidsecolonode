@@ -1,5 +1,4 @@
 /* node JS */
-let connection = require('../Connection');
 const logger = require("../tools/logger").Create(__filename); // debug perso
 const Tools = require('../tools/Tools');
 

@@ -80,6 +80,9 @@ create table niveau (
     ordre int, 
     valeur varchar (250)
 );
+insert into niveau (ordre, valeur) values (1, 'cocon');
+insert into niveau (ordre, valeur) values (2, 'chenille');
+insert into niveau (ordre, valeur) values (3, 'papillon');
 CREATE SEQUENCE questionseq INCREMENT 1 START 1;
 create table question(
     id varchar(25) primary key,
@@ -89,6 +92,45 @@ create table question(
     foreign key (idtheme) references theme(id),
     foreign key (idniveau) references niveau(id)
 );
+insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0001', '');
+insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0001', '');
+insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0001', '');
+insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0001', '');
+insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0001', '');
+insert into question (idtheme, idniveau, question) values ('THM0002', 'NIV0001', '');
+insert into question (idtheme, idniveau, question) values ('THM0002', 'NIV0001', '');
+insert into question (idtheme, idniveau, question) values ('THM0002', 'NIV0001', '');
+insert into question (idtheme, idniveau, question) values ('THM0002', 'NIV0001', '');
+insert into question (idtheme, idniveau, question) values ('THM0003', 'NIV0001', '');
+insert into question (idtheme, idniveau, question) values ('THM0003', 'NIV0001', '');
+insert into question (idtheme, idniveau, question) values ('THM0003', 'NIV0001', '');
+insert into question (idtheme, idniveau, question) values ('THM0003', 'NIV0001', '');
+insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0002', '');
+insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0002', '');
+insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0002', '');
+insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0002', '');
+insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0002', '');
+insert into question (idtheme, idniveau, question) values ('THM0002', 'NIV0002', '');
+insert into question (idtheme, idniveau, question) values ('THM0002', 'NIV0002', '');
+insert into question (idtheme, idniveau, question) values ('THM0002', 'NIV0002', '');
+insert into question (idtheme, idniveau, question) values ('THM0002', 'NIV0002', '');
+insert into question (idtheme, idniveau, question) values ('THM0003', 'NIV0002', '');
+insert into question (idtheme, idniveau, question) values ('THM0003', 'NIV0002', '');
+insert into question (idtheme, idniveau, question) values ('THM0003', 'NIV0002', '');
+insert into question (idtheme, idniveau, question) values ('THM0003', 'NIV0002', '');
+insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0003', '');
+insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0003', '');
+insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0003', '');
+insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0003', '');
+insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0003', '');
+insert into question (idtheme, idniveau, question) values ('THM0002', 'NIV0003', '');
+insert into question (idtheme, idniveau, question) values ('THM0002', 'NIV0003', '');
+insert into question (idtheme, idniveau, question) values ('THM0002', 'NIV0003', '');
+insert into question (idtheme, idniveau, question) values ('THM0002', 'NIV0003', '');
+insert into question (idtheme, idniveau, question) values ('THM0003', 'NIV0003', '');
+insert into question (idtheme, idniveau, question) values ('THM0003', 'NIV0003', '');
+insert into question (idtheme, idniveau, question) values ('THM0003', 'NIV0003', '');
+insert into question (idtheme, idniveau, question) values ('THM0003', 'NIV0003', '');
 CREATE SEQUENCE repquestseq INCREMENT 1 START 1;
 create table reponsequestion(
     id varchar(25) primary key,
@@ -106,6 +148,7 @@ create table reponsejoueur(
     foreign key (idjoueur) references joueur(id)
 );
 
+alter table reponsequestion add column pts int;
 --lib theme (theme selon question)
 create or replace view questiontheme as select q.id, idtheme, question, idniveau, t.valeur, desce, ordre, etat from question q join theme t on q.idtheme = t.id join niveau n on q.idniveau = n.id;
 --reponse joueur complet
