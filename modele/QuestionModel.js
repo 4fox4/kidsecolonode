@@ -4,6 +4,39 @@ const Tools = require('../tools/Tools');
 
 module.exports = class QuestionModel{
 
+    static repondre(connexion, idjoueur, idquestion, pts){
+        return new Promise((resolve, reject) => {
+            const model = JoueurModel;
+            try {
+                // user query
+                const userQuery = {
+                    text : `insert into reponsejoueur (idjoueur, idquestion, pts)
+                            values
+                            ($1, $2, $3)`,
+                    values : [
+                        idjoueur, idquestion, pts
+                    ]
+                };
+                connexion.query(userQuery, function(error){
+                    if(error){
+                        logger.error(error);
+                        reject(error);
+                        return;
+                    }else{
+                        let result = {
+                            "status" : "200",
+                            "data" : model
+                        };
+                        resolve(result);
+                    }
+                });
+            } catch(e) {
+                logger.error(`Echec Insertion user ${pseudo}, Rollback`);
+                logger.error(e.detail || (e + ''));
+                throw e;
+            }
+        })
+    }
     static getChoixReponse(connexion, idquestion){
         return new Promise((resolve, reject) => {
 			const sql = {
