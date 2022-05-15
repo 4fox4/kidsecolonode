@@ -1,3 +1,4 @@
+endPoint = https://kidsecolonode.herokuapp.com
 inscription
 POST /joueur/inscription
 body {
@@ -5,7 +6,7 @@ body {
     "prenoms": "Aina",
     "pseudo": "Aina kely",
     "mdp": "aina",
-    "datenaissance": "12-16-2018" 
+    "datenaissance": "mm-dd-yyyy" 
 }
 
 Login
@@ -17,3 +18,10 @@ body {
 
 Avoir score
 GET /joueur/score?id=JOU0001
+
+all Themes
+GET /theme/all
+
+Details theme
+GET /theme/details?idtheme=THM0001
+

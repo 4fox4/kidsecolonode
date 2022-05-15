@@ -38,6 +38,42 @@ create table detailstheme(
     video text,
     foreign key (idtheme) references theme(id)
 );
+insert into detailstheme (idtheme, titre, desce, video) values ('THM0001', 'Comment réutiliser les boites de céréales en rangement', 'Ce dont vous avez besoin: <p>-boite de céréales</p> <p>-colle</p> <p>-crayon de bois, gomme, règle</p> <p>-scotch</p> <p>-papier adhésif décoratif</p> Avec de simples boites de céréales, réalisez un petit rangement. Je coupe le haut des boites en diagonale, je les recouvre de papier, en comptant un rentré (dans la boite) pour que cela soit plus joli et le tour est joué!!! Pour coller, le vernis-colle est parfait! Evidemment, j`ai opté pour les papiers japonais que je trouve sublimes. La prochaine fois, ce sera une version adulte en noir et blanc avec le tuto, hyper tendance cet hiver!!', 'http://karinethiboult.over-blog.com/2015/09/diy-recup-rangement-avec-des-boites-de-cereales.html');
+insert into detailstheme (idtheme, titre, desce, img) values ('THM0001', 'Transformer une boite de céréales en petit cahier de notes', '- Boîte de céréales (1 boîte de céréales permet de fabriquer 2 cahiers. Vous pouvez également utiliser du carton, du papier cartonné ou des boîtes cadeaux)
+- Du papier pour les pages intérieures (j`ai utilisé 20 feuilles de papier informatique de format 8,5" x 11", mais vous pouvez aussi utiliser du papier ligné ou du papier millimétré).
+- Un morceau de papier décoratif (pour couvrir le dos)
+- des ciseaux
+- une règle
+- Un stylo
+- Bâton de colle, ruban adhésif ou ruban double-face
+- Aiguille et fil à broder
+- Bouton
+
+<p> Marche à suivre : 
+- Découpez la boîte de céréales pour créer la couverture de votre cahier. J`ai découpé un morceau de 5,5 x 8 pouces pour le mien, mais vous pouvez le faire aussi petit ou grand que vous le souhaitez.
+- Pliez-la en deux de façon à ce que le côté vierge soit orienté vers l`extérieur.
+- Passez du fil à broder dans l`aiguille et cousez le bouton sur le devant du carnet. Laissez pendre environ 30 cm de fil. Il servira à entourer le cahier pour le fermer.
+- Pour recouvrir les images de la boîte de céréales, appliquez de la colle ou du ruban adhésif à l`intérieur du carnet (assurez-vous d`atteindre les coins !) et placez un morceau de papier par-dessus pour le fixer. Coupez autour des bords pour enlever l`excédent de papier.
+- Prenez votre papier pour les pages intérieures et coupez-le de façon à ce qu`il soit légèrement plus petit que le carnet (environ 1/4" plus court sur tous les côtés).
+- À l`aide de l`aiguille et du fil à broder, cousez le papier sur le cahier, le long du dos.
+- Appliquez de la colle ou du ruban adhésif sur votre papier décoratif et fixez-le au dos du carnet.
+- Facultatif : Pour un aspect plus fini, coupez des coins arrondis sur les quatre bords du carnet.</p>
+', 'http://4.bp.blogspot.com/-w5Y-TMiELLc/T82X-6S_wYI/AAAAAAAABOg/HTG9wD8BAwU/s640/DIY-Project-Tutorial-Mini-Pocket-Notebook-Journal-Cereal-Box-2.jpg');
+insert into detailstheme (idtheme, titre, desce, video) values ('THM0001', 'Réaliser une mangeoire pour oiseaux avec une boîte à oeufs', 'Ce dont nous avons besoin: Ciseaux, 30cm de ficelle, 1 boite à oeufs et des graines', 'https://www.youtube.com/watch?v=w7hlmcudasE&t=14s');
+insert into detailstheme (idtheme, titre, desce, img) values ('THM0001', 'Faire un bracelet écolo en recyclant une bouteille d’eau et des chutes de tissus', 'Rien de plus simple, il vous faut :
+-une bouteille d’eau vide
+-des chutes de tissus, plus ou moins larges selon l’effet désiré
+-une bonne paire de ciseaux
+-du scotch
+-de la colle', 'bracelet.png');
+insert into detailstheme (idtheme, titre, desce, video) values ('THM0001', 'Réaliser des vases avec des bouteilles en plastique', 'Nettoyer et sécher la bouteille en plastique puis la couper en deux. ...
+Peindre des motifs simples comme des fleurs sur le dessus de la bouteille pour la décorer.
+Ajouter des arabesques ou des lignes en suivant les formes de la bouteille.
+Laisser sécher le vase bouteille qui est terminé !', 'https://www.youtube.com/watch?v=mYvYl2LhXaY');
+insert into detailstheme (idtheme, titre, desce, img) values ('THM0002', 'Les couleurs pour les déchets', 'Vert: pour les verres, Bleu: pour les papiers, Jaune: pour les boîtes de conserve, Orange: pour les plastiques, Gris: pour les matières organiques, Rouge: pour les matières non recyclable comme les batteries, les ampoules ou les piles', 'https://www.pinterest.fr/pin/342484746665792949/');
+insert into detailstheme (idtheme, titre, desce) values ('THM0003', 'Economiser l`eau', 'Se brosser les dents avec un gobelet permet d`économiser l`eau');
+insert into detailstheme (idtheme, titre, desce) values ('THM0003', 'Eteindre les lumières avant de dormir', '');
+insert into detailstheme (idtheme, titre, desce) values ('THM0003', 'Utiliser des sacs biodégradables', '');
 CREATE SEQUENCE niveauseq INCREMENT 1 START 1;
 create table niveau (
     id varchar (25) primary key,
