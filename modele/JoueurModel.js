@@ -50,13 +50,17 @@ module.exports = class JoueurModel{
                 };
                 connexion.query(userQuery, function(error){
                     if(error){
-                        logger.error(error);
-                        reject(error);
-                        return;
+                        let result = {
+                            "status" : "200",
+                            error: false,
+                            "data" : []
+                        };
+                        resolve(result);
                     }else{
                         let result = {
                             "status" : "200",
-                            "data" : model
+                            error: false,
+                            "data" : [model]
                         };
                         resolve(result);
                     }
