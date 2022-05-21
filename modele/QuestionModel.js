@@ -78,7 +78,7 @@ module.exports = class QuestionModel{
                     let finalres = {
                         "status" : "200",
                         "error": true,
-                        "data" : "Pas de question"
+                        "data" : []
                     };
                     resolve(finalres);
                 }
