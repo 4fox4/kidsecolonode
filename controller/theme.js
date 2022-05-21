@@ -18,6 +18,24 @@ router.get('/', (req, res) => {
 	});
 });
 
+router.get('/search', (req, res) =>{
+	const connexion = Connection();
+	const promise = ThemeModel.rechercher(connexion, req.query.keyword);
+	promise.then(function(value){
+		res.json(value);
+	}).catch( error => {
+		console.error(error);
+		res.json({
+			status : 400, // reponse http
+			error : true, // pour signaler que ceci est une erreur
+			detailed : `${error} : concernant la requête infos `, // erreur pour les devs
+			data : "Une erreur est survenue lors de la requête" // pour les users
+		});
+	}).finally(()=>{
+		connexion.end();
+	});
+});
+
 router.get('/details', (req, res) =>{
 	const connexion = Connection();
 	const promise = ThemeModel.getDetails(connexion, req.query.idtheme);

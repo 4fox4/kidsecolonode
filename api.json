@@ -26,4 +26,18 @@ Details theme
 GET /theme/details?idtheme=THM0001
 
 all Questions
-GET /question?idniveau=
+GET /question/niveau?idniveau=NIV001
+
+reponses possible à une question
+GET /question/rep?idquestion=
+
+repondre
+POST /question/repondre
+body{
+    "idjoueur": "",
+    "idquestion": "",
+    "pts": 0
+}
+
+recherche
+GET /theme/search?keyword=e
