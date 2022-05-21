@@ -74,7 +74,9 @@ insert into detailstheme (idtheme, titre, desce, img) values ('THM0002', 'Les co
 insert into detailstheme (idtheme, titre, desce) values ('THM0003', 'Economiser l`eau', 'Se brosser les dents avec un gobelet permet d`économiser l`eau');
 insert into detailstheme (idtheme, titre, desce) values ('THM0003', 'Eteindre les lumières avant de dormir', '');
 insert into detailstheme (idtheme, titre, desce) values ('THM0003', 'Utiliser des sacs biodégradables', '');
+
 CREATE SEQUENCE niveauseq INCREMENT 1 START 1;
+
 create table niveau (
     id varchar (25) primary key,
     ordre int, 
