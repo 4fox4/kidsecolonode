@@ -57,7 +57,7 @@ router.post('/repondre', (req, res) =>{
 
 router.get('/niveau', (req, res) =>{
 	const connexion = Connection();
-	const promise = questionModel.getByNiv(connexion, req.query.idniveau);
+	const promise = questionModel.getByNiv(connexion, req.query.idniveau, req.query.idtheme);
 	promise.then(function(value){
 		res.json(value);
 	}).catch( error => {

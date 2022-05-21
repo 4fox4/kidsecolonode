@@ -43,40 +43,62 @@ module.exports = class QuestionModel{
 				text : "select * from reponsequestion where idquestion like $1",
 				values : [idquestion]
 			};
-			logger.info(sql);
-			connexion.query(sql, function(error, resultSet, fields){
+
+            connexion.query(sql, function(error, resultSet, fields){
 				if(error){
 					logger.error(error);
 					reject(error);
 					return;
 				}
                 let finalres = {
-                        "status" : "200",
-                        "data" : resultSet.rows
-                    };
+                    "status" : "200",
+                    "error": false,
+                    "data" : resultSet.rows
+                };
                 resolve(finalres);
 			});
         })
     }
 
-    static getByNiv (connexion, idniveau) {
+    static getByNiv (connexion, idniveau, idtheme) {
+        var model = this;
         return new Promise((resolve, reject) => {
 			const sql = {
-				text : "select * from question where idniveau like $1",
-				values : [idniveau]
+				text : "select * from question where idniveau like $1 and idtheme like $2",
+				values : [idniveau, idtheme]
 			};
-			logger.info(sql);
 			connexion.query(sql, function(error, resultSet, fields){
 				if(error){
 					logger.error(error);
 					reject(error);
 					return;
 				}
-                let finalres = {
+                let lengthResult = resultSet.rows.length;
+                if(lengthResult == 0){
+                    let finalres = {
                         "status" : "200",
-                        "data" : resultSet.rows
+                        "error": true,
+                        "data" : "Pas de question"
                     };
-                resolve(finalres);
+                    resolve(finalres);
+                }
+                let i = 0;
+                resultSet.rows.forEach(res => {
+                    i++;
+                    const prom2 = model.getChoixReponse(connexion, res.id);
+                    prom2.then (value =>{
+                        res.reponses = value.data;
+                        
+                        if(i == lengthResult){
+                            let finalres = {
+                                "status" : "200",
+                                "error": false,
+                                "data" : resultSet.rows
+                            };
+                            resolve(finalres);
+                        }
+                    });
+                })
 			});
         })
 	}

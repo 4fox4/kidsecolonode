@@ -29,7 +29,7 @@ Details theme
 GET /theme/details?idtheme=THM0001
 
 all Questions
-GET /question/niveau?idniveau=NIV001
+GET /question/niveau?idniveau=NIV0001&idtheme=THM0001
 
 reponses possible à une question
 GET /question/rep?idquestion=
