@@ -27,9 +27,8 @@ app.use('/session', require("./controller/session")); // check token validation 
 app.use('/joueur', require("./controller/joueur")); // inscription, 
 app.use('/theme', require("./controller/theme")); // theme, 
 app.use('/question', require("./controller/question")); // theme, 
+app.use('/about', express.static('./tools/about_html'));
 
-// [!] : mini page web pour tester les sockets (faites pas attention)
-app.use('/test_socket', express.static('./tools/test_socket'));
 
 // [!] : middleware qui capture tous les erreurs 404
 app.use((req, res, next) => {
