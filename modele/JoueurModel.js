@@ -86,7 +86,10 @@ module.exports = class JoueurModel{
                 if(Object.keys(resultSet.rows).length === 0){
                     let result = {
                         "status" : "200",
-                        "error": "Login ou mot de passe erroné"
+                        "error": true,
+                        "data": {
+                            "error_msg": "Login ou mot de passe erroné"
+                        }
                     };
                     resolve(result);
                 }
@@ -95,6 +98,7 @@ module.exports = class JoueurModel{
                     {
                         let finalres = {
                             "status" : "200",
+                            "error": false,
                             "data" : resultSet.rows[result]
                         };
                         resolve(finalres);
