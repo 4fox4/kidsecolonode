@@ -99,7 +99,7 @@ module.exports = class JoueurModel{
                         let finalres = {
                             "status" : "200",
                             "error": false,
-                            "data" : resultSet.rows[result]
+                            "data" : resultSet.rows
                         };
                         resolve(finalres);
                     }
