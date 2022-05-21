@@ -87,9 +87,7 @@ module.exports = class JoueurModel{
                     let result = {
                         "status" : "200",
                         "error": true,
-                        "data": {
-                            "error_msg": "Login ou mot de passe erroné"
-                        }
+                        "data": []
                     };
                     resolve(result);
                 }
