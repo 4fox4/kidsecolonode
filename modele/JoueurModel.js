@@ -52,7 +52,7 @@ module.exports = class JoueurModel{
                     if(error){
                         let result = {
                             "status" : "200",
-                            error: false,
+                            error: true,
                             "data" : []
                         };
                         resolve(result);
@@ -60,7 +60,7 @@ module.exports = class JoueurModel{
                         let result = {
                             "status" : "200",
                             error: false,
-                            "data" : [model]
+                            "data" : []
                         };
                         resolve(result);
                     }
