@@ -18,7 +18,26 @@ router.get('/', (req, res) => {
 	});
 });
 
-router.post('/reponse', (req, res) =>{
+
+router.get('/rep', (req, res) =>{
+	const connexion = Connection();
+	const promise = questionModel.getChoixReponse(connexion, req.query.idquestion);
+	promise.then(function(value){
+		res.json(value);
+	}).catch( error => {
+		console.error(error);
+		res.json({
+			status : 400, // reponse http
+			error : true, // pour signaler que ceci est une erreur
+			detailed : `${error} : concernant la requête infos `, // erreur pour les devs
+			data : "Une erreur est survenue lors de la requête" // pour les users
+		});
+	}).finally(()=>{
+		connexion.end();
+	});
+});
+
+router.post('/repondre', (req, res) =>{
     const connexion = Connection();
 	const promise = questionModel.repondre(connexion, req.body.idjoueur, req.body.idquestion, req.body.pts);
 	promise.then(function(value){

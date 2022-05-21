@@ -9,7 +9,24 @@ module.exports = class ThemeModel{
 				text : "select * from detailstheme where idtheme like $1",
 				values : [idtheme]
 			};
-			logger.info(sql);
+			connexion.query(sql, function(error, resultSet, fields){
+				if(error){
+					logger.error(error);
+					reject(error);
+					return;
+				}
+                let finalres = {
+                        "status" : "200",
+                        "data" : resultSet.rows
+                    };
+                resolve(finalres);
+			});
+        })
+    }
+
+	static rechercher(connexion, keyword){
+        return new Promise((resolve, reject) => {
+			const sql = "select * from theme where valeur like '%"+keyword+"%' or desce like '%"+keyword+"%'";
 			connexion.query(sql, function(error, resultSet, fields){
 				if(error){
 					logger.error(error);
@@ -30,7 +47,6 @@ module.exports = class ThemeModel{
 			const sql = {
 				text : "select * from theme",
 			};
-			logger.info(sql);
 			connexion.query(sql, function(error, resultSet, fields){
 				if(error){
 					logger.error(error);
