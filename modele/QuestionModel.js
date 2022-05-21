@@ -4,17 +4,14 @@ const Tools = require('../tools/Tools');
 
 module.exports = class QuestionModel{
 
-    static repondre(connexion, idjoueur, idquestion, pts){
+    static delete(connexion, idjoueur, idquestion){
         return new Promise((resolve, reject) => {
-            const model = JoueurModel;
             try {
                 // user query
                 const userQuery = {
-                    text : `insert into reponsejoueur (idjoueur, idquestion, pts)
-                            values
-                            ($1, $2, $3)`,
+                    text : `delete from reponsejoueur where idjoueur like $1 and idquestion like $2`,
                     values : [
-                        idjoueur, idquestion, pts
+                        idjoueur, idquestion
                     ]
                 };
                 connexion.query(userQuery, function(error){
@@ -25,11 +22,49 @@ module.exports = class QuestionModel{
                     }else{
                         let result = {
                             "status" : "200",
-                            "data" : model
+                            "error": false,
+                            "data" : "Probleme delete"
                         };
                         resolve(result);
                     }
                 });
+            } catch(e) {
+                logger.error(`Echec Insertion user ${pseudo}, Rollback`);
+                logger.error(e.detail || (e + ''));
+                throw e;
+            }
+        })
+    }
+    
+    static repondre(connexion, idjoueur, idquestion, pts){
+        return new Promise((resolve, reject) => {
+            try {
+                // user query
+                const userQuery = {
+                    text : `insert into reponsejoueur (idjoueur, idquestion, pts)
+                            values
+                            ($1, $2, $3)`,
+                    values : [
+                        idjoueur, idquestion, pts
+                    ]
+                };
+                const promise2 = this.delete(connexion, idjoueur, idquestion);
+                promise2.then(value=>{
+                    connexion.query(userQuery, function(error){
+                        if(error){
+                            logger.error(error);
+                            reject(error);
+                            return;
+                        }else{
+                            let result = {
+                                "status" : "200",
+                                "error": false,
+                                "data" : "Success"
+                            };
+                            resolve(result);
+                        }
+                    });
+                })
             } catch(e) {
                 logger.error(`Echec Insertion user ${pseudo}, Rollback`);
                 logger.error(e.detail || (e + ''));
