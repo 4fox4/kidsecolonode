@@ -20,12 +20,14 @@ module.exports = class JoueurModel{
                 if(Object.keys(resultSet.rows).length === 0){
                     let result = {
                         "status" : "200",
-                        "error": "Jouez pour voir vos scores"
+                        "error": true,
+                        "data": "Jouez pour voir vos scores"
                     };
                     resolve(result);
                 }
                 let finalres = {
                         "status" : "200",
+                        "error": false,
                         "data" : resultSet.rows
                     };
                 resolve(finalres);

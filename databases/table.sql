@@ -92,7 +92,7 @@ create table question(
     foreign key (idtheme) references theme(id),
     foreign key (idniveau) references niveau(id)
 );
-insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0001', '');
+insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0001', 'Le plastique est-il biodégradable?');
 insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0001', '');
 insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0001', '');
 insert into question (idtheme, idniveau, question) values ('THM0001', 'NIV0001', '');
@@ -138,6 +138,10 @@ create table reponsequestion(
     libelle varchar(500),
     foreign key (idquestion) references question(id)
 );
+insert into reponsequestion (idquestion, libelle, pts) values ('QUE0001', 'Oui', 1);
+insert into reponsequestion (idquestion, libelle, pts) values ('QUE0001', 'Non', 0);
+insert into reponsequestion (idquestion, libelle, pts) values ('QUE0001', 'Je ne sais pas', 0);
+
 CREATE SEQUENCE repjseq INCREMENT 1 START 1;
 create table reponsejoueur(
     id varchar(25) primary key,
@@ -147,6 +151,7 @@ create table reponsejoueur(
     foreign key (idquestion) references question(id),
     foreign key (idjoueur) references joueur(id)
 );
+insert into reponsejoueur (idquestion, idjoueur, pts) values ('QUE0001', 'JOU001', 1);
 
 alter table reponsequestion add column pts int;
 --lib theme (theme selon question)
