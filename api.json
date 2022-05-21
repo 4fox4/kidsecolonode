@@ -16,6 +16,9 @@ body {
     "mdp": "aina"
 }
 
+Get niveau
+GET /joueur/niveau
+
 Avoir score
 GET /joueur/score?id=JOU0001
 

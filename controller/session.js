@@ -3,8 +3,6 @@ const router = express.Router();
 const TokenManager = require("../tools/TokenManager");
 const AuthentificationRoutine = require("../tools/AuthentificationRoutine");
 const logger = require('../tools/logger');
-
-const PerServ = require('../modele/PersonneModel');
 const connection = require('../Connection');
 const Email = require('../tools/Email');
 
@@ -19,6 +17,7 @@ router.get('/', (req, res) => {
 		data : "Rien par ici"
 	});
 });
+
 
 //inscription
 // router.post('/inscription', (req,res) => {
