@@ -35,7 +35,7 @@ reponses possible à une question
 GET /question/rep?idquestion=
 
 repondre
-POST /question/repondre
+POST /question/repondre 
 body{
     "idjoueur": "",
     "idquestion": "",
