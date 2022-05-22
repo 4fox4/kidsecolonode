@@ -119,11 +119,13 @@ module.exports = class QuestionModel{
                 }
                 let i = 0;
                 resultSet.rows.forEach(res => {
-                    i++;
                     const prom2 = model.getChoixReponse(connexion, res.id);
+                    console.log(" question id "+res.id);
                     prom2.then (value =>{
+                        i++;
                         res.reponses = value.data;
-                        
+                        console.log(value.data);
+
                         if(i == lengthResult){
                             let finalres = {
                                 "status" : "200",
