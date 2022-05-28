@@ -23,12 +23,13 @@ app.use(function(req, res, next) {
 
 // [!] : definition des routes
 // Chaque lien et sous lien devrait avoir une protection token
-app.use('/session', require("./controller/session")); // check token validation (login, logout)
-app.use('/joueur', require("./controller/joueur")); // inscription, 
-app.use('/theme', require("./controller/theme")); // theme, 
-app.use('/question', require("./controller/question")); // theme, 
-app.use('/about', express.static('./tools/about_html'));
-
+// app.use('/session', require("./controller/session")); // check token validation (login, logout)
+// app.use('/joueur', require("./controller/joueur")); // inscription, 
+// app.use('/theme', require("./controller/theme")); // theme, 
+// app.use('/question', require("./controller/question")); // theme, 
+// app.use('/about', express.static('./tools/about_html'));
+const routes = require("./routes");
+app.use('/', routes);
 
 // [!] : middleware qui capture tous les erreurs 404
 app.use((req, res, next) => {
